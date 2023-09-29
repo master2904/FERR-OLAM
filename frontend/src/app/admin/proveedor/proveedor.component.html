@@ -1,0 +1,78 @@
+<br>
+<h4 style="text-align: center; font-size: 20px;"><strong>PROVEEDORES</strong></h4>
+<br>
+<div class="row">
+    <div class="col-lg-2 offset-1">
+        <div class="btn-group" role="group">
+            <button mat-raised-button class="btn btn-outline-primary"(click)="agregar()"><mat-icon>add</mat-icon>Nuevo Proveedor</button>
+            <button mat-raised-button class="btn btn-outline-warning"(click)="agregar()"><mat-icon>add</mat-icon>Ver por Producto</button>
+        </div>
+    </div>
+    <!-- <div class="col-lg-8">
+        <input type="search" class="form-control" placeholder="Buscar" name="filterPost"  [(ngModel)]="filterpost"  maxlength="20">
+    </div> -->
+</div>
+<hr>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-lg-5">
+        <table class="table table-sm table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Observacion</th>
+                <th scope="col" style="text-align: center;">Opcion</th>
+            </tr>
+            </thead>
+        <tbody>    
+            <tr *ngFor="let c of proveedores|filterC:filterpost;let i =index" (click)="mostrar(c,i)">
+            <td>{{i + 1}}</td>
+            <td>{{c.nombre}} {{c.apellido}}</td>
+            <td>{{c.empresa}}</td>
+            <td>{{c.observacion}}</td>
+            <td style="text-align: center;">
+                <div class="btn-group" role="group" >
+                    <button type="button" class="btn btn-success btn-sm"  (click)="cambiar(c)">
+                        <mat-icon >edit</mat-icon>
+                    </button>
+                    <button (click)="remove(c.id)" class="btn btn-sm btn-danger">
+                        <mat-icon>delete</mat-icon>
+                    </button>    
+                </div>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="col-lg-5" *ngIf="visto">
+        <h6 style="font-size: 20px; text-align: center;">{{nombre|uppercase}}</h6>
+        <br>
+        <button mat-raised-button class="btn btn-outline-primary"(click)="crear_relacion()"><mat-icon>add</mat-icon>Nuevo Producto</button>
+        <table class="table table-sm table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Opcion</th>
+            </tr>
+            </thead>
+        <tbody>    
+            <tr *ngFor="let c of detalle;let i =index">
+            <td>{{i + 1}}</td>
+            <td>{{c.descripcion}}</td>
+            <td style="text-align: center;">
+                <div class="btn-group" role="group" >
+                    <button (click)="eliminar(c.id)" style="color: red; border: none;">
+                        <mat-icon>delete</mat-icon>
+                    </button>    
+                </div>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+

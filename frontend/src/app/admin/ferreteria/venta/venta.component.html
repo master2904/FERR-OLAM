@@ -1,0 +1,72 @@
+<br>
+<h3 style="text-align:center; font-size: 25px;">VENTAS</h3>
+<div class="row">  
+  <div class="col-2"></div>
+  <div class="col-xl-8 col-lg-10 col-sm-10">
+    <hr>
+    <div class="container" *ngIf="sig==0">
+        <form [formGroup]="nuevo">
+          <div>
+              <mat-form-field class="example-full-width">
+                <mat-label>Producto</mat-label>
+                <input type="text" placeholder="Producto" aria-label="Number" matInput #cliente_id [formControl]="producto" [matAutocomplete]="autos" (input)="nuevo_producto($event.target.value);">
+                <mat-autocomplete autoActiveFirstOption #autos="matAutocomplete">
+                  <mat-option *ngFor="let option of filtroProducto | async" [value]="option.descripcion" (click)="setear_producto(option)">
+                    {{option.codigo}} = {{option.descripcion}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error >{{error_producto()}}</mat-error>
+              </mat-form-field> 
+            <mat-form-field class="example-container">
+              <mat-label>Precio</mat-label>
+              <input matInput formControlName="precio" type="number" placeholder="Precio"  name="precio" max="1000" min="0">
+              <mat-error >{{error_precio()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-container">
+              <mat-label>Cantidad </mat-label>
+              <input matInput formControlName="cantidad" type="number" placeholder="Cantidad" name="cantidad" min="1"  (input)="validar($event.target.value);">
+              <mat-error >{{error_cantidad()}}</mat-error>
+            </mat-form-field>
+            <button style="border: 0; text-align: center;font-size: 10px;" (click)="carrito()" *ngIf="nuevo.valid" [disabled]="!nuevo.valid"><mat-icon style="color: green">add_circle</mat-icon></button>
+          </div>
+        </form>
+    </div>  
+    <table class="table table-sm table-responsive-sm" *ngIf="sig==0">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Codigo</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+            <th scope="col" colspan="2">Sub Total</th>
+        </tr>
+        </thead>
+      <tbody>    
+        <tr [ngClass]="{'table-ligth':i%2==0,'table-info':i%2==1}" *ngFor="let fila of ventas;let i =index">
+          <td >{{i + 1}}</td>
+          <td *ngFor="let item of fila; let j = index" [ngClass]="{'derecha':j==4,'none':i<4}">{{item}}
+          </td>  
+          <td style="text-align: center;">
+            <mat-icon style="color: red; font-size: 20px; cursor: pointer;" (click)="eliminar(i)">cancel</mat-icon>
+          </td>
+            <!-- <button style="border: 0; text-align: center;font-size: 10px;" >
+            </button> -->
+        </tr>
+        <tr class="table-warning">
+          <td colspan="5">Total</td>
+          <td class="derecha">{{total}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <app-cliente *ngIf="sig>0"></app-cliente>
+    <div class="btn-group" role="group">
+      <button *ngIf="sig==0" class="btn btn-sm btn-danger"><mat-icon style="font-size: 20px;">cancel_presentation</mat-icon> Cancelar</button>
+      <button *ngIf="sig>0" class="btn btn-sm btn-primary" (click)="sig=sig-1"><mat-icon style="font-size: 20px;">keyboard_arrow_left</mat-icon> Anterior</button>
+      <button *ngIf="sig<1" class="btn btn-sm btn-primary" [disabled]="matriz.length==0" (click)="sig=sig+1"><mat-icon style="font-size: 20px;">keyboard_arrow_right</mat-icon> Siguiente</button>
+      <button *ngIf="sig==1" class="btn btn-sm btn-success" (click)="realizar_venta()"><mat-icon style="font-size: 20px;">attach_money</mat-icon> Vender</button>
+    </div>
+  </div>
+</div>
+

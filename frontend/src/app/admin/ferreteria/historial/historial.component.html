@@ -1,0 +1,85 @@
+<!-- <div class="row" style="text-align: center;">
+  <div class="btn-group" role="group" aria-label="Button group">
+    <button class="btn btn-sm btn-primary">FEcha</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <table class="table table-sm table-responsive-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Sub Total</th>
+        </tr>
+        </thead>
+      <tbody>    
+        <tr [ngClass]="{'table-ligth':i%2==0,'table-info':i%2==1}" *ngFor="let fila of ventas;let i =index">
+            <td >{{i + 1}}</td>
+            <td>{{fila.username}}</td>
+            <td>{{fila.nombre}}</td>
+            <td>{{fila.descripcion}}</td>
+            <td>{{fila.fecha}}</td>
+            <td>{{fila.cantidad}}</td>
+            <td>{{fila.precio}}</td>
+            <td>{{fila.sub_total}}</td>
+        </tr>
+        <tr class="table-primary">
+          <td>Total</td>
+          <td>{{total()}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>    
+</div> -->
+
+<br>
+<h4 class="text-center" style="font-size: 25px;">DETALLE DE VENTAS</h4>
+<hr>
+<mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Seleccione una fecha" (dateChange)="setear($event.target.value)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>   
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-sm-8 col-md-8 col-lg-8">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+                <th>#</th>
+                <th>Usuario</th>
+                <th>Cliente</th>
+                <th>Venta</th>
+                <th>Compra</th>
+                <th>Utilidad</th>
+                <th>Detalle</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let h of historial;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{h.id_usuario}}</td>
+                    <td>{{h.id_cliente}}</td>
+                    <!-- <td>{{h.monto}}</td> -->
+                    <td  style="text-align: center;">{{h.total_venta}}</td>
+                    <td  style="text-align: center;">{{h.total_compra}}</td>
+                    <td class="table-success" style="text-align: center;">{{h.total_venta-h.total_compra}}</td>
+                    <td>
+                        <button (click)="ver(i)" style="color: blue; border: none;"><mat-icon>remove_red_eye</mat-icon></button>
+                    </td>
+                </tr>
+                <tr class="table-warning">
+                  <td colspan="3"><strong>Total</strong></td>
+                  <td><strong>{{total_venta}}</strong></td>
+                  <td><strong>{{total_compra}}</strong></td>
+                  <td><strong>{{utilidad}}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

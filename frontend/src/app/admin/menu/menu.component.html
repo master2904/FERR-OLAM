@@ -1,0 +1,37 @@
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: auto;">
+  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse my-2 my-lg-0" id="collapsibleNavId">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item" ><a class="nav-link" routerLink="/admin/home"> <mat-icon class="icono">home</mat-icon>Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/admin/usuario"> <mat-icon class="icono">person</mat-icon>Usuarios</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/admin/proveedor"> <mat-icon class="icono">business</mat-icon>Proveedores</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/admin/cliente"> <mat-icon class="icono">people</mat-icon>Clientes</a></li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Ferreteria</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="/admin/ferreteria/producto">Producto</a>
+              <a class="dropdown-item" href="/admin/ferreteria/tipo">Categoria</a>
+              <a class="dropdown-item" href="/admin/ferreteria/detalle">Detalle</a>
+              <a class="dropdown-item" href="/admin/ferreteria/inventario">Inventario</a>
+              <a class="dropdown-item" href="/admin/ferreteria/venta">Ventas</a>
+              
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Barraca</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="#">Producto</a>
+              <a class="dropdown-item" href="#">Detalle</a>
+              <a class="dropdown-item" href="#">Inventario</a>
+              <a class="dropdown-item" href="#">Ventas</a>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link" (click)="cerrar_sesion()"> <mat-icon class="icono">exit_to_app</mat-icon>Cerrar Sesion</a></li>
+        </ul>
+      </div>
+    </nav>
+    <router-outlet></router-outlet>

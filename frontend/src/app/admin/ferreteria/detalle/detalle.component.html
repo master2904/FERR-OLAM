@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
+    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+      <div *cdkVirtualFor="let item of productos" class="example-item">
+        <div class="card" (click)="mostrar_tipo(item)">
+          <div class="btn btn-outline-primary card ">
+            <div style="text-align: center;">
+              <img src="{{llenar_imagen(item.imagen)}}" alt="Foto" width="80px" height="80px"> 
+              <h5 class="card-title" style="text-align: center;">{{item.nombre}}</h5>
+            </div>
+          </div>
+        </div>    
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+  <div class="col-xl-9 col-lg-8 col-sm-12">
+    <br>
+    <h5 style="text-align: center; font-size: 25px;">DETALLE DE LOS PRODUCTOS</h5>
+    <br>
+    <h6 *ngIf="flat" class="badge badge-success" style="text-align: center; font-size: 15px;" >{{f_productos.nombre}} => {{descripcion}}</h6>
+    <div class="row">
+      
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6" *ngFor="let t of tipos;let i = index">
+            <div class="btn btn-outline-primary card " (click)="mostrar_detalle(t)">
+              <div class="card-text"style="text-align:center;font-size: 12px;">
+                {{t.descripcion}}
+              </div>
+          </div>
+      </div>
+    </div>
+    <hr>
+    <button mat-raised-button class="btn btn-outline-primary"(click)="agregar()" *ngIf="flat2"><mat-icon>add</mat-icon>Nuevo Item</button>
+    <!-- <button type="button" class="btn btn-sm btn-outline-primary"(click)="agregar()" *ngIf="flat"><mat-icon class="icono">add</mat-icon>Nuevo Producto</button> -->
+    <table class="table table-sm table-bordered" *ngIf="flat2">
+      <thead class="thead-dark centro">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Codigo</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Cantidad Minima</th>
+          <th scope="col">Precio(Compra)</th>
+          <th scope="col">Precio(Venta)</th>
+          <th scope="col">Opcion</th>
+       </tr>
+      </thead>
+    <tbody>    
+      <tr *ngFor="let d of detalles;let i =index">
+        <td>{{i + 1}}</td>
+        <td>{{d.codigo}}</td>
+        <td>{{d.descripcion}}</td>
+        <td [ngClass]="{'rojo':alerta(d.stock,d.cantidad_minima),'negro':alerta(d.stock,d.cantidad_minima)==false}">{{d.stock}}</td>
+        <td>{{d.cantidad_minima}}</td>
+        <td>{{d.precio_compra}}</td>
+        <td>{{d.precio_venta}}</td>
+        <td class="centro">
+          <div class="btn-group" role="group" >
+            <button type="button" class="btn btn-success btn-sm"  (click)="	cambiar(d)">
+              <mat-icon >edit</mat-icon>
+            </button>
+            <button href="" (click)="remove(d.id)" class="btn btn-danger btn-sm">
+              <mat-icon>delete</mat-icon>
+            </button>    
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

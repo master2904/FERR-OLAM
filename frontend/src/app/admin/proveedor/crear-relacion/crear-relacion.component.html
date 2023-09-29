@@ -1,0 +1,24 @@
+<div>
+    <h3 mat-dialog-title><strong>AGREGAR PRODUCTO</strong></h3>
+    <div mat-dialog-content>
+        <div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 700px; padding: 1rem;">
+            <form [formGroup]="agregar">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Producto</mat-label>
+                    <input type="text" placeholder="Producto" aria-label="Number" matInput #cliente_id [formControl]="producto" [matAutocomplete]="autos" (keyup.enter)="onenter()">
+                     <!-- (input)="nuevo_producto($event.target.value);"> -->
+                    <mat-autocomplete autoActiveFirstOption #autos="matAutocomplete">
+                      <mat-option *ngFor="let option of filtroProducto | async" [value]="option.descripcion" (click)="setear_producto(option)">
+                        {{option.descripcion}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <!-- <mat-error >{{error_producto()}}</mat-error> -->
+                  </mat-form-field> 
+            </form>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close class="btn btn-secondary">Cancelar</button>
+        <button mat-button [mat-dialog-close]="true" class="btn btn-danger">Agregar</button>
+    </div>
+</div>
