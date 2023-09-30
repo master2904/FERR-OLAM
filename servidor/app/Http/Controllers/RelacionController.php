@@ -97,8 +97,11 @@ class RelacionController extends Controller
      * @param  \App\Models\relacion  $relacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(relacion $relacion)
+    public function destroy($id)
     {
-        //
+        $r=relacion::find($id);
+        $id_vendor=$r->id_vendor;
+        $r->delete();
+        return $this->lista($id_vendor);
     }
 }

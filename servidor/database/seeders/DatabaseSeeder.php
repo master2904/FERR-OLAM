@@ -2,11 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Categoria;
-use App\Models\Concurso;
-use App\Models\Colegio;
 use App\Models\Detalle;
-use App\Models\Problema;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Tipo;

@@ -66,12 +66,13 @@ import { CrearTipoComponent } from './tipo/crear-tipo/crear-tipo.component';
 import { CrearProductoComponent } from './producto/crear-producto/crear-producto.component';
 import { EditarProductoComponent } from './producto/editar-producto/editar-producto.component';
 import { HistorialComponent } from './historial/historial.component';
-import { PipeDPipe } from 'src/app/pipes/pipe-detalle.pipe';
+// import { PipeDPipe } from 'src/app/pipes/pipe-detalle.pipe';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { RegistrarComponent } from './inventario/registrar/registrar.component';
 import { VerComponent } from './historial/ver/ver.component';
 import { ClienteComponent } from './venta/cliente/cliente.component';
 import { ReporteProductoMesComponent } from './reporte-producto-mes/reporte-producto-mes.component';
+import { ImgRotaDirective } from './img-rota.directive';
 
 
 
@@ -80,7 +81,7 @@ const router:Routes=[];
 @NgModule({
   declarations: [FerreteriaComponent,
     DetalleComponent,
-    PipeDPipe,
+    // PipeDPipe,
     ProductoComponent,
     TipoComponent,
     InventarioComponent,
@@ -96,7 +97,7 @@ const router:Routes=[];
     RegistrarComponent, 
     VerComponent, 
     ClienteComponent, 
-    ReporteProductoMesComponent
+    ReporteProductoMesComponent, ImgRotaDirective
   ],
   imports: [
     CommonModule,

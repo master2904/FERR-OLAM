@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2" >
+    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport" style="width: 100%;">
+      <div *cdkVirtualFor="let item of productos" class="example-item">
+      <div class="card" (click)="mostrar_tipo(item)">
+        <div class="btn btn-outline-primary card ">
+          <div style="text-align: center;">
+            <img src="{{llenar_imagen(item.imagen)}}" alt="Foto" width="80px" height="80px"> 
+            <h5 class="card-title" style="text-align: center;">{{item.nombre}}</h5>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>
+<div class="col-xl-10 col-lg-9 col-sm-12" style="width: 100%;">
+  <cdk-virtual-scroll-viewport appendOnly itemSize="100" class="example-viewport" style="width: 100%;">
+    <br>
+    <h5 style="text-align: center; font-size: 25px;">INVENTARIO</h5>
+    <button type="button" class="btn btn-outline-danger" (click)="pdf()"><mat-icon>picture_as_pdf</mat-icon></button>
+      <div *ngFor="let t of tipos;let i = index">
+        <h3 style="font-size:20px;"><span class="btn btn-sm btn-primary">
+          {{t.descripcion}} <span class="badge badge-light">{{detalles[i].length}}</span>
+        </span></h3>
+            <table class="table table-sm table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Cantidad Minima</th>
+                  <th scope="col">Precio(Compra)</th>
+                  <th scope="col">Precio(Venta)</th>
+                  <th scope="col">Utilidad</th>
+              </tr>
+              </thead>
+            <tbody>    
+              <tr *ngFor="let d of detalles[i];let j =index" [ngClass]="{'alerta':alerta(d),'normal':!alerta(d)}">
+                <td>{{j + 1}}</td>
+                <td>{{d.codigo}}</td>
+                <td>{{d.descripcion}}</td>
+                <td class="prueba" [ngClass]="{'rojo':alerta(d),'negro':!alerta(d)}" (click)="modificar(d,1,i,j)" style="cursor:pointer">{{d.stock}}</td>
+                <td>{{d.cantidad_minima}}</td>
+                <td style="cursor:pointer" class="prueba" (click)="modificar(d,2,i,j)">{{d.precio_compra}}</td>
+                <td style="cursor:pointer" class="prueba" (click)="modificar(d,3,i,j)">{{d.precio_venta}}</td>
+                <td>{{d.precio_venta-d.precio_compra}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    <hr>    
+  </cdk-virtual-scroll-viewport>
+  </div>
+</div>
+
+

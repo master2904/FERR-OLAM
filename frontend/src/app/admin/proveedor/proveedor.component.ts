@@ -10,7 +10,7 @@ import { DialogoComponent } from 'src/app/dialogo/dialogo.component';
 import { VerProductosComponent } from './ver-productos/ver-productos.component';
 import { CrearRelacionComponent } from './crear-relacion/crear-relacion.component';
 import { RelacionService } from 'src/app/services/relacion.service';
-
+import { Relacion } from 'src/app/model/relacion';
 @Component({
   selector: 'app-proveedor',
   templateUrl: './proveedor.component.html',
@@ -65,7 +65,8 @@ export class ProveedorComponent implements OnInit {
     const dialogo1 = this.dialog.open(CrearRelacionComponent, dialogConfig);
     dialogo1.afterClosed().subscribe(art => {
       if (art != undefined){
-        console.log(art)
+        this.nueva_relacion(art.value)
+        // console.log(art)
         // this.update(art.value,i,j)
         // this.toastr.success("")
       }
@@ -76,7 +77,16 @@ export class ProveedorComponent implements OnInit {
     );
 
   }
-  
+  nueva_relacion(form){
+    console.log(this.fila)
+    let f:Relacion={id:0,id_detalle:form.id,id_vendor:this.proveedores[this.fila].id}
+    this.relacion.nuevo(f).subscribe((data:any)=>{
+      this.productos[this.fila]=data[0];
+      console.log(data)
+      this.detalle=this.productos[this.fila];
+      this.toastr.success("Producto agregado exitosamente","")
+    })
+  }
   ver() {
     let data: Proveedor;
     const dialogo1 = this.dialog.open(VerProductosComponent, {data});
@@ -126,10 +136,11 @@ export class ProveedorComponent implements OnInit {
     .afterClosed()
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
-        this.proveedor.remove(id).subscribe((data:any)=>{
-          this.proveedores=data[0];
-          this.productos=data[1];
-              this.toastr.success('Producto Eliminado','')
+        this.relacion.remove(id).subscribe((data:any)=>{
+          this.productos[this.fila]=data[0];
+          // console.log(data)
+          this.detalle=this.productos[this.fila];
+          this.toastr.success('Producto Eliminado','')
         });          
       } else {
         this.toastr.info('Operacion Cancelada','');
@@ -150,7 +161,7 @@ export class ProveedorComponent implements OnInit {
   fila=0
   mostrar(c,i){
     this.fila=i
-    // console.log(c)
+    console.log(this.fila)
     this.nombre=c.nombre+" "+c.apellido
     this.visto=true
     this.detalle=this.productos[i];

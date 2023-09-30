@@ -22,7 +22,8 @@
         <div class="card text-white bg-primary">
         <div class="card bg-primary">
             <div style="text-align: center;">
-    					<img src="{{llenar_imagen(lab.imagen)}}" alt="Foto" width="100%" height="150px"> 
+    					<img appImgRota [src]="llenar_imagen(lab.imagen)" alt="Foto" width="100%" height="150px"> 
+    					<!-- <img [src]="" src="{{llenar_imagen(lab.imagen)}}" alt="Foto" width="100%" height="150px">  -->
             </div>
             <div class="card-footer">
               <h6 class="card-title" style="text-align: center;font-size: 15px;">{{lab.nombre}}</h6>

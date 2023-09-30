@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2">
+    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+      <div *cdkVirtualFor="let item of productos" class="example-item">
+        <div class="card" (click)="mostrar_detalle(item)">
+          <div class="btn btn-outline-primary card ">
+            <div style="text-align: center;">
+              <img src="{{llenar_imagen(item.imagen)}}" alt="Foto" width="80px" height="80px"> 
+              <h5 class="card-title" style="text-align: center;">{{item.nombre}}</h5>
+            </div>
+          </div>
+        </div>    
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+  <div class="col-xl-8 col-lg-8 col-sm-12">
+    <br>
+    <h5 style="text-align: center; font-size: 25px;"><strong>CATEGORIAS</strong></h5>
+    <br>
+    <h6 *ngIf="flat" class="badge badge-success" style="text-align: center; font-size: 15px;" >{{f_productos.nombre}}</h6>
+    <br>
+    <button mat-raised-button class="btn btn-outline-primary"(click)="agregar()" *ngIf="flat"><mat-icon>add</mat-icon>Nueva Categoria</button>
+    <hr>
+    <table class="table table-sm table-bordered" *ngIf="flat">
+      <thead class="bg-primary">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Detalle</th>
+          <th scope="col" style="text-align: center;">Opcion</th>
+       </tr>
+      </thead>
+    <tbody>    
+      <tr *ngFor="let d of tipos;let i =index">
+        <td>{{i + 1}}</td>
+        <td>{{d.descripcion}}</td>
+        <td style="text-align: center;">
+          <div class="btn-group" role="group" >
+            <button type="button" class="btn btn-success btn-sm"  (click)="	actualizar(d)">
+              <mat-icon class="icono" >edit</mat-icon>
+            </button>
+            <button href="" (click)="remove(d.id)" class="btn btn-danger btn-sm">
+              <mat-icon class="icono">delete</mat-icon>
+            </button>    
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

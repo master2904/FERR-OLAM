@@ -17,7 +17,15 @@ const routes: Routes = [
     //   role:'2'
     // },
     // canActivate:[RolesGuard],
-},
+  },
+  {
+    path:'barraca',
+    loadChildren:()=>import('./barraca/barraca.module').then(a => a.BarracaModule),
+    // data:{
+    //   role:'2'
+    // },
+    // canActivate:[RolesGuard],
+  },
     {
       component:AdminComponent,
       path:'',

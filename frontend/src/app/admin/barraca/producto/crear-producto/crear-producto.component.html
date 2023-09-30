@@ -1,0 +1,32 @@
+<div>
+    <h3 mat-dialog-title style="text-align: center;"> <strong>NUEVO PRODUCTO</strong></h3>
+    <div mat-dialog-content>
+        <div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 700px; padding: 1rem;">
+            <form [formGroup]="agregar">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre" type="text" placeholder="ALAMBRE" name="nombre" maxlength="35" pattern="[A-Za-z0-9- ]{3,35}">
+                        <mat-error *ngIf="nombre.invalid">{{error_nombre()}}</mat-error>
+                    </mat-form-field>
+                <!-- <div>
+                    <input id="image" class="form-control" type="image"alt="Login" (click)="simagen.click()" src="../../../assets/images/new.png">
+                    <input type="file" accept="image/png,image/jpeg,image/jpg" class="form-control" #simagen id="imagen" formControlName="imagen" [hidden]="true" (change)="cargarImagen($event)">
+                    <mat-error *ngIf="imagen.invalid">{{error_imagen()}}</mat-error>
+                </div> -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Imagen</mat-label>
+                    <ngx-mat-file-input formControlName="imagen" placeholder="Imagen" accept="image/jpeg,image/jpg" (change)="cargarImagen($event)"></ngx-mat-file-input>
+                    <mat-icon matSuffix>image</mat-icon>
+                    <mat-error *ngIf="imagen.invalid">{{error_imagen()}}</mat-error>
+                </mat-form-field>                
+            </form>
+            <div style="text-align: center; width: 100%;">
+                <img *ngIf="previsualizacion" height="80px" width="100px" [src]="previsualizacion" alt="">
+             </div>            
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
+        <button mat-button [mat-dialog-close]="agregar" class="btn btn-danger" [disabled]="agregar.invalid" (click)="nuevo()">Agregar</button>
+    </div>
+</div>

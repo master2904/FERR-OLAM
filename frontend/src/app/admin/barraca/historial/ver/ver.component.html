@@ -1,0 +1,42 @@
+<div>
+    <h4 mat-dialog-title><strong>Detalle de La venta Realizada</strong></h4>
+    <div mat-dialog-content>
+        <div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;">
+            <table class="table table-sm">
+                <thead class="thead-dark">
+                    <th>#</th>
+                    <th>Detalle</th>
+                    <th>Cantidad</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta</th>
+                    <th>Compra</th>
+                    <th>Venta</th>
+                    <th>Utilidad</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let fila of historial;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{fila.id_detalle}}</td>
+                    <td>{{fila.cantidad}}</td>
+                    <td>{{fila.precio_compra}}</td>
+                    <td>{{fila.precio_venta}}</td>
+                    <td>{{fila.sub_total_compra}}</td>
+                    <td>{{fila.sub_total_venta}}</td>
+                    <td class="table-success">{{fila.sub_total_venta-fila.sub_total_compra}}</td>
+                </tr>
+                <tr class="table-warning">
+                    <td colspan="5">Totales</td>
+                    <td><strong>{{total_compra}}</strong>
+                    <td><strong>{{total_venta}}</strong>
+                    <td class="table-success"><strong>{{total_venta - total_compra}}</strong>
+                </td>
+                </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button class="btn btn-primary" (click)="cancelar()">Cerrar</button>
+        
+    </div>
+</div>

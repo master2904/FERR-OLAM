@@ -51,10 +51,13 @@ export class CrearRelacionComponent implements OnInit {
     });
   }
   onenter(){
-    console.log('presionaste enter')
-    console.log(this.agregar.controls['producto'].value)
+    // console.log('presionaste enter')
+    // console.log(this.agregar.controls['producto'].value)
   }
   setear_producto(option){
-    console.log(option)
+    this.agregar.controls['id'].setValue(option.id)
+    this.agregar.controls['producto'].setValue(option.descripcion)
+    // console.log(option)
   }
+  nuevo(){}
 }

@@ -59,6 +59,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { DatePipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DialogoComponent } from './dialogo/dialogo.component';
+
 const router:Routes=[];
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ const router:Routes=[];
     NavAdminComponent,
     PerfilComponent,
     SliderComponent,
-    DialogoComponent
+    DialogoComponent,
+    // ImgRotaDirective
     // NuevoComponent
   ],
   imports: [
