@@ -18,8 +18,10 @@ class CreateHistorialsTable extends Migration
             $table->integer('id_venta');
             $table->integer('id_detalle');
             $table->integer('cantidad');
-            $table->float('precio');
-            $table->float('sub_total');
+            $table->float('precio_compra');
+            $table->float('precio_venta');
+            $table->float('sub_total_compra');
+            $table->float('sub_total_venta');
             $table->timestamps();
         });
     }

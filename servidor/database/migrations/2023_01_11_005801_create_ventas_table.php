@@ -14,13 +14,12 @@ class CreateVentasTable extends Migration
     public function up()
     {
         Schema::create('ventas', function (Blueprint $table) {
+
             $table->id();
             $table->integer('id_usuario');
-            $table->integer('id_detalle');
             $table->integer('id_cliente');
-            $table->integer('cantidad');
-            $table->float('precio');
-            $table->float('sub_total');
+            $table->float('total_venta');
+            $table->float('total_compra');
             $table->date('fecha');
             $table->timestamps();
         });

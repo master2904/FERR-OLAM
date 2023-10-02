@@ -177,7 +177,7 @@ export class VentaComponent implements OnInit {
     this.f.cliente=formulario_cLiente;
     this.f.venta=formulario_venta;
     this.f.historial=this.matriz;
-    // console.log(f)
+    console.log(this.f)
     this.venta.nuevo(this.f).subscribe(data=>{
       console.log(data)
       this.pdf(data);
