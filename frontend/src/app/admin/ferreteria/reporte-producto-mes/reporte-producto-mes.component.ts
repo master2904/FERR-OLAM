@@ -1,33 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { VentaService } from 'src/app/services/venta.service';
-
+import {Colores} from 'src/app/colores'
+import { color } from 'html2canvas/dist/types/css/types/color';
+import { MatPaginator } from '@angular/material/paginator';
+import { Observable } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-reporte-producto-mes',
   templateUrl: './reporte-producto-mes.component.html',
   styleUrls: ['./reporte-producto-mes.component.scss']
 })
 export class ReporteProductoMesComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  obs: Observable<any>;
+  categorias=[];
+  meses=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
+  dataSource: MatTableDataSource<any>
   pie=0;
   fecha:Date
   anio=[]
-  meses=[
-    {id:1,valor:'ENERO'},
-    {id:2,valor:'FEBRERO'},
-    {id:3,valor:'MARZO'},
-    {id:4,valor:'ABRIL'},
-    {id:5,valor:'MAYO'},
-    {id:6,valor:'JUNIO'},
-    {id:7,valor:'JULIO'},
-    {id:8,valor:'AGOSTO'},
-    {id:9,valor:'SEPTIEMBRE'},
-    {id:10,valor:'OCTUBRE'},
-    {id:11,valor:'NOVIEMBRE'},
-    {id:12,valor:'DICIEMBRE'}]
   mostrar=false;
   // single: any[];
-  view: any[] = [900, 300];
+  view: any[] = [700, 300];
   single = [];
-  categorias=[];
   colores=[];
   cate=[];
   // options
@@ -42,12 +37,9 @@ export class ReporteProductoMesComponent implements OnInit {
   xAxisLabel = 'Colegios';
   showYAxisLabel = true;
   yAxisLabel = 'Cantidad';
-
   
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA','#5AA454', '#A10A28', '#C7B42C', '#AAAAAA','#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
 concursos=[];
+colo:Colores = new Colores()
   onSelect(data): void {
     // console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
@@ -58,25 +50,42 @@ concursos=[];
     // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
   fcon=null;
-  constructor(private venta:VentaService) { }
+  constructor(private venta:VentaService,private changeDetectorRef: ChangeDetectorRef) { }
   fechar(c){
     this.pie=2;
     this.categorias=[];
     this.colores=[];
-    this.view = [700, 300];
-        this.venta.r_meses(c).subscribe((data:any)=>{
-          this.single=[];
-          // this.colorScheme.domain=[]
-          console.log(data)
-          data.forEach(valor => {
-            let x={"name":valor.nombre,"value":valor.valor}
+    this.view = [900,300];
+    this.venta.r_meses(c).subscribe((data:any)=>{
+      let t=0
+      data.forEach(fila => {
+        let colorScheme = {
+          domain: []
+        };
+        // this.colorScheme.domain=[]
+        this.single=[];
+        let i = 0
+          let val=fila
+          console.log(val)
+          val.forEach(value=>{
+            let x={"name":value.nombre,"value":value.valor}
             this.single.push(x);
-            // this.colorScheme.domain.push('#ffffff');
+            colorScheme.domain.push(this.colo.get(i));
+            i++
           });
-          this.categorias.push(this.single);
-          // this.colores.push(this.colorScheme);
-          // console.log(this.categorias)
-        });        
+        // this.colores.push(colorScheme);
+        let y={'valor':this.single,'color':colorScheme,'mes':this.meses[t]}
+        t++
+        this.categorias.push(y);
+        // this.categorias.push(this.single);
+      });
+      console.log(this.categorias)
+      console.log(this.colores)
+      this.dataSource= new MatTableDataSource<any>(this.categorias);
+      this.changeDetectorRef.detectChanges();
+      this.dataSource.paginator = this.paginator;
+      this.obs = this.dataSource.connect();
+    });        
   }
   listar(c){
     this.mostrar=true;
@@ -84,10 +93,11 @@ concursos=[];
     this.pie=0;
   }
   ngOnInit(): void {
-    let i=2010
+    let i=2020
     while(i<2025){
       this.anio.push(i++)
     }
+    
   }
   
 }

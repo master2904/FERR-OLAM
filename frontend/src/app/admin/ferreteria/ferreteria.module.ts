@@ -128,7 +128,7 @@ const router:Routes=[];
     ScrollingModule   ,
     MaterialFileInputModule,
     NgxChartsModule,
-
+    MatPaginatorModule,
 
   ],  
   exports:[
