@@ -28,7 +28,7 @@ export class CrearProveedorComponent implements OnInit {
       apellido:new FormControl('',[Validators.required,Validators.minLength(3),Validators.pattern(this.letras)]),
       empresa: new FormControl('',[Validators.required,Validators.minLength(4)]),
       celular: new FormControl('',[Validators.required]),
-      observacion: new FormControl('',[Validators.required]),
+      observacion: new FormControl('',[]),
     });
   }
   get nombre(){return this.agregar.get('nombre'); }

@@ -36,7 +36,7 @@ export class HistorialComponent implements OnInit {
     let form={fecha:null}
     let nombre=""+fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+(fecha.getDate());
     form.fecha=nombre;
-    this.venta.fecha(nombre).subscribe((data:any)=>{
+    this.venta.fecha(nombre,1).subscribe((data:any)=>{
       // console.log(data)
       this.historial=data[0];
       this.transacciones=data[1];

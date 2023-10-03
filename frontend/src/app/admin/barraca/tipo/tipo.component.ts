@@ -30,7 +30,7 @@ export class TipoComponent implements OnInit {
   constructor(private producto:ProductoService, private route:Router,private toastr: ToastrService,private dialog:MatDialog,private dialogo:MatDialog,private tipo:TipoService) { 
   }
   ngOnInit(): void {
-    this.producto.listar(1).subscribe((data:any)=>{
+    this.producto.listar(0).subscribe((data:any)=>{
       this.productos=data;
       console.log(this.productos);
     });

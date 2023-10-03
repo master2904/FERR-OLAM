@@ -37,10 +37,11 @@ class VentaController extends Controller
         // $consulta=DB::select('SELECT v.id, u.username, c.nombre, p.nombre, t.descripcion, d.descripcion, v.cantidad,v.precio,v.sub_total, v.fecha FROM users u, ventas v,clientes c,detalles d, tipos t, products p WHERE v.id_usuario=u.id and v.id_detalle = d.id and v.id_cliente=c.id and d.id_tipo=t.id and t.id_producto=p.id',['fecha'=> $fecha]);
         return response()->json([]);
     }
-    public function fecha($request){
+    public function fecha($id,$request){
         // $listado=DB::select('SELECT v.id, v.id_usuario,v.id_cliente,v.id_detalle, sum(h.sub_total_compra) FROM ventas v,historials h where h.id_venta=v.id and v.fecha=:id',['id'=> $request]);
-        // $listado=DB::select('SELECT v.id, v.id_usuario,v.id_cliente,v.id_detalle FROM ventas v,historials h where h.id_venta=v.id and v.fecha=:id',['id'=> $request]);
-        $listado=Venta::where('fecha',$request)->get();
+        $listado=DB::select('SELECT v.id, v.id_usuario,v.id_cliente FROM ventas v,historials h, detalles d, tipos t, products p where p.lugar=:lugar and p.id=t.id_producto and t.id=d.id_tipo and d.id=h.id_detalle and h.id_venta=v.id and v.fecha=:id',['id'=> $request,'lugar'=>$id]);
+        // $listado=DB::select('SELECT v.id, v.id_usuario,v.id_cliente,v.total_venta,v.total_compra FROM ventas v,historials h, detalles d, tipos t, products p where p.id=t.id_producto and t.id=d.id_tipo and d.id=h.id_detalle and h.id_venta=v.id and v.fecha=:id',['id'=> $request]);
+        // $listado=Venta::where('fecha',$request)->get();
         $i=0;
         $historial=[];
         while(isset($listado[$i])){
@@ -61,8 +62,6 @@ class VentaController extends Controller
         }
         return response()->json(array($listado,$historial));
     }
-
-
     public function listar_cliente($id_cliente){
         $lista=Venta::where('id_cliente',$id_cliente)->get();
         return response()->json($lista);

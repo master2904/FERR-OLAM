@@ -37,7 +37,7 @@ Route::post('/detalle/delete', [DetalleController::class,'delete']);
 Route::get('/equipo/buscar/{id}',[EquipoController::class,'buscar']);
 Route::put('/equipo/rango/{id}',[EquipoController::class,'rango']);
 Route::get('/detalle/venta/{id}',[DetalleController::class,'lista_venta']);
-Route::get('/venta/fecha/{fecha}',[VentaController::class,'fecha']);
+Route::get('/venta/fecha/{id}/{fecha}',[VentaController::class,'fecha']);
 Route::delete('/problema/eliminar/{id}/{n}',[ProblemaController::class,'eliminar']);
 Route::delete('/equipo/eliminar/{id}/{n}',[EquipoController::class,'eliminar']);
 Route::get('/categoria/buscar/{id}',[CategoriaController::class,'buscar']);

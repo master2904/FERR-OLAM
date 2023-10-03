@@ -52,6 +52,7 @@ colo:Colores = new Colores()
   fcon=null;
   constructor(private venta:VentaService,private changeDetectorRef: ChangeDetectorRef) { }
   fechar(c){
+    this.mostrar=true
     this.pie=2;
     this.categorias=[];
     this.colores=[];
@@ -86,11 +87,6 @@ colo:Colores = new Colores()
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
     });        
-  }
-  listar(c){
-    this.mostrar=true;
-    this.fcon=c;
-    this.pie=0;
   }
   ngOnInit(): void {
     let i=2020

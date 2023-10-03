@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import {MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker';
 import { UsuarioComponent } from './usuario/usuario.component';
-import { ProblemaComponent } from './problema/problema.component';
 import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminComponent } from './admin.component';
@@ -29,8 +28,6 @@ import {MatCardModule} from '@angular/material/card';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import { CrearUsuarioComponent } from './usuario/crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from './usuario/editar-usuario/editar-usuario.component';
-import { CrearProblemaComponent } from './problema/crear-problema/crear-problema.component';
-import { EditarProblemaComponent } from './problema/editar-problema/editar-problema.component';
 import { FilterConcursoPipe } from './pipes/filter-concurso.pipe';
 import { ImportarComponent } from './importar/importar.component';
 import {MatMenuModule} from '@angular/material/menu';
@@ -61,7 +58,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     UsuarioComponent, 
-    ProblemaComponent, 
     HomeComponent, 
     AdminComponent,
     FilterUPipe, 
@@ -74,8 +70,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     PipeScorePipe, 
     CrearUsuarioComponent, 
     EditarUsuarioComponent, 
-    CrearProblemaComponent, 
-    EditarProblemaComponent,     
     FilterConcursoPipe, ImportarComponent,
     ReporteComponent,
     ClienteComponent,

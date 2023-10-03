@@ -63,7 +63,7 @@ export class VentaComponent implements OnInit {
       startWith(''),
       map(value => this._filter_producto(value || '')),
     );
-    this.detalle.listar_ventas(1).subscribe((data:any)=>{
+    this.detalle.listar_ventas(0).subscribe((data:any)=>{
       this.detalles=data;
       this.filtro_productos = this.detalles.map(w => {
         console.log(w)
