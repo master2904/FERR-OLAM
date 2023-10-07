@@ -16,7 +16,7 @@ use App\Http\Controllers\TipoController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\RelacionController;
 
-Route::apiResource('/cliente', 'App\Http\Controllers\ClienteController');
+// Route::apiResource('/cliente', 'App\Http\Controllers\ClienteController');
 Route::apiResource('/relacion', 'App\Http\Controllers\RelacionController');
 Route::apiResource('/detalle', 'App\Http\Controllers\DetalleController');
 Route::apiResource('/producto', 'App\Http\Controllers\ProductController');
